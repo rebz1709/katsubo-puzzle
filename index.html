@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Yume no Katsubō</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <title>Yume no Katsubō</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Yume no Katsubō</h1>
-    <p class="subtitle">Unravel the illusions where memories and dreams collide.</p>
+    <div class="container">
+        <h1>Yume no Katsubō</h1>
+        <p class="subtitle">Unravel the illusions where memories and dreams collide.</p>
 
-    <!-- Quiz Area -->
-    <div id="quiz" class="quiz-box"></div>
+        <button id="startGameButton" style="display: block; margin: 20px auto; padding: 10px 20px; font-size: 1.2em; cursor: pointer;">Start Game</button>
 
-    <!-- Characters Display -->
-    <div id="characters" class="char-wrapper"><h3>🧠 Characters</h3></div>
+        <div id="quiz" class="quiz-box"></div>
 
-    <!-- Puzzle Grid -->
-    <div id="game" class="grid"></div>
+        <div id="characters" class="char-wrapper"><h3>🧠 Characters</h3></div>
 
-    <!-- Navigation -->
-    <button onclick="nextLevel()">Next</button>
-    <p id="message"></p>
+        <div id="game" class="grid"></div>
 
-    <!-- Voices -->
-    <audio id="voice-yash" src="https://voca.ro/1kypiCyEhIQ2?download" preload="auto"></audio>
-    <audio id="voice-shiro" src="https://voca.ro/1bZNgZkPBP7A?download" preload="auto"></audio>
-    <audio id="voice-rebz" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3" preload="auto"></audio>
+        <button onclick="nextLevel()">Next</button>
+        <p id="message"></p>
 
-    <!-- Background Music -->
-    <audio id="bgm" src="https://assets.mixkit.co/music/preview/mixkit-memories-of-a-hero-1041.mp3" autoplay loop></audio>
-  </div>
+        <div style="margin-top: 20px; text-align: center;">
+            <label for="bgmVolume">Music Volume:</label>
+            <input type="range" id="bgmVolume" min="0" max="1" step="0.01" value="0.5" style="width: 150px; vertical-align: middle;">
+            <button id="toggleBGM" style="margin-left: 10px; padding: 5px 10px; cursor: pointer;">Pause/Play Music</button>
+        </div>
 
-  <!-- Puzzle + Quiz Script -->
-  <script src="script.js"></script>
+        <audio id="voice-yash" src="https://voca.ro/1kypiCyEhIQ2?download" preload="auto"></audio>
+        <audio id="voice-shiro" src="https://voca.ro/1bZNgZkPBP7A?download" preload="auto"></audio>
+        <audio id="voice-rebz" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3" preload="auto"></audio>
+
+        <audio id="bgm" src="https://assets.mixkit.co/music/preview/mixkit-memories-of-a-hero-1041.mp3" autoplay loop preload="auto"></audio>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
