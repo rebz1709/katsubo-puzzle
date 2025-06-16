@@ -24,52 +24,102 @@ fetch("https://yume-backend-rabiya.onrender.com/api/characters")
     });
   });
 
-// 🎮 Puzzle Levels
-const levels = [
-  ["🟦", "⬜", "✨"],
-  ["⬜", "✨", "🟦"],
-  ["✨", "🟦", "⬜"]
+// ✅ Puzzle + Quiz Stages
+const stages = [
+  {
+    tiles: ["🟦", "⬜", "✨"],
+    question: "Which desire drives the story of Yume no Katsubō?",
+    options: [
+      "Power over others",
+      "Truth behind memories",
+      "Wealth and fame",
+      "Escape from the real world"
+    ],
+    answer: 1,
+    voice: "voice-yash"
+  },
+  {
+    tiles: ["⬜", "✨", "🟦"],
+    question: "What is the essence of true faith?",
+    options: [
+      "Seeing is believing",
+      "Waiting for proof",
+      "Believing even in silence",
+      "Knowing the outcome first"
+    ],
+    answer: 2,
+    voice: "voice-shiro"
+  },
+  {
+    tiles: ["✨", "🟦", "⬜"],
+    question: "What is the truest nature of death?",
+    options: [
+      "End of all stories",
+      "Beginning of memory",
+      "Punishment for weakness",
+      "A failure to live"
+    ],
+    answer: 1,
+    voice: "voice-rebz"
+  }
 ];
-let level = 0;
 
-// ✅ Load Puzzle Tiles + Voice
+let currentLevel = 0;
+
 function loadLevel() {
   const game = document.getElementById("game");
+  const quiz = document.getElementById("quiz");
   const message = document.getElementById("message");
-  message.textContent = "";
-  game.innerHTML = "";
 
-  levels[level].forEach(tile => {
+  game.innerHTML = "";
+  quiz.innerHTML = "";
+  message.textContent = "";
+
+  const { tiles, question, options, voice } = stages[currentLevel];
+
+  // 🔊 Play stage voice
+  const audio = document.getElementById(voice);
+  if (audio) audio.play();
+
+  // 🧩 Load puzzle tiles
+  tiles.forEach(tile => {
     const div = document.createElement("div");
     div.textContent = tile;
     game.appendChild(div);
   });
 
-  if (level === 0) {
-    document.getElementById("voice-yash")?.play();
-  } else if (level === 1) {
-    document.getElementById("voice-shiro")?.play();
-  }
+  // 🧠 Load quiz question + options
+  const q = document.createElement("p");
+  q.textContent = `🧠 ${question}`;
+  quiz.appendChild(q);
+
+  options.forEach((opt, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.className = "quiz-btn";
+    btn.onclick = () => checkAnswer(index);
+    quiz.appendChild(btn);
+  });
 }
 
-// ✅ Level Progression + Rebz Unlock
-function nextLevel() {
-  if (level < levels.length - 1) {
-    level++;
-    loadLevel();
-  } else {
-    document.getElementById("message").textContent = "✨ You unlocked Rebz (レブズ)!";
-    const rebz = document.getElementById("rebz-card");
-    if (rebz) {
-      rebz.style.display = "block";
-      rebz.style.border = "2px solid gold";
-      rebz.style.boxShadow = "0 0 15px gold";
+function checkAnswer(selected) {
+  if (selected === stages[currentLevel].answer) {
+    if (currentLevel < stages.length - 1) {
+      currentLevel++;
+      loadLevel();
+    } else {
+      document.getElementById("message").textContent = "✨ You unlocked Rebz (レブズ)!";
+      const rebz = document.getElementById("rebz-card");
+      if (rebz) {
+        rebz.style.display = "block";
+        rebz.style.border = "2px solid gold";
+        rebz.style.boxShadow = "0 0 15px gold";
+      }
+      document.getElementById("voice-rebz")?.play();
     }
-
-    document.getElementById("voice-rebz")?.play();
+  } else {
+    alert("❌ Wrong answer! Try again.");
   }
 }
 
-// ✅ Start Game
 window.onload = loadLevel;
-
