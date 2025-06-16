@@ -3,10 +3,15 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background: url('Background.png') no-repeat center center fixed;
-  background-size: cover;
+  background-image: url('Background.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: contain;   /* ✅ Show full poster */
+  background-attachment: fixed;
+  background-color: #000;     /* Fallback fill */
   color: #fff;
 }
+
 
 /* Centered container */
 .container {
