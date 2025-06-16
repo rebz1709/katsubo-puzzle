@@ -7,7 +7,7 @@ body {
   background-image: url('Background.png');
   background-position: top center;
   background-repeat: no-repeat;
-  background-size: 100% auto;     /* 💡 Full width poster */
+  background-size: 100% auto;
   background-color: #000;
   color: #fff;
   background-attachment: fixed;
@@ -21,7 +21,7 @@ body {
   text-align: center;
   padding: 20px;
   backdrop-filter: blur(3px);
-  background-color: rgba(0, 0, 0, 0.6); /* dark transparent overlay */
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 15px;
   margin-top: 40px;
 }
@@ -66,10 +66,28 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* ✅ Quiz Area */
+.quiz-box {
+  margin: 20px 0;
+}
+.quiz-btn {
+  margin: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.quiz-btn:hover {
+  background-color: #555;
+}
+
 /* 📱 Mobile Responsive */
 @media (max-width: 600px) {
   body {
-    background-size: cover;           /* Mobile fix: fill height properly */
+    background-size: cover;
     background-position: center center;
   }
 
