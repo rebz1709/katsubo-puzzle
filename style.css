@@ -1,4 +1,4 @@
-/* Full background */
+/* 🌌 Full Background Poster */
 body {
   margin: 0;
   padding: 0;
@@ -6,14 +6,13 @@ body {
   background-image: url('Background.png');
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: contain;   /* ✅ Show full poster */
+  background-size: contain; /* show full poster without cutting */
   background-attachment: fixed;
-  background-color: #000;     /* Fallback fill */
+  background-color: #000; /* fallback background */
   color: #fff;
 }
 
-
-/* Centered container */
+/* 🧩 Centered Game UI Container */
 .container {
   max-width: 90%;
   width: 600px;
@@ -21,12 +20,12 @@ body {
   text-align: center;
   padding: 20px;
   backdrop-filter: blur(3px);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6); /* dark transparent overlay */
   border-radius: 15px;
   margin-top: 40px;
 }
 
-/* Game grid (responsive) */
+/* 🔳 Puzzle Grid */
 .grid {
   display: flex;
   justify-content: center;
@@ -34,7 +33,6 @@ body {
   margin: 20px 0;
   flex-wrap: wrap;
 }
-
 .grid div {
   width: 60px;
   height: 60px;
@@ -47,7 +45,18 @@ body {
   border-radius: 8px;
 }
 
-/* Responsive text */
+/* 🎭 Character Cards */
+.char-wrapper {
+  margin: 20px 0;
+}
+.char-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+/* ✨ Headings */
 h1 {
   font-size: 2.2rem;
 }
@@ -56,19 +65,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Characters section */
-.char-wrapper {
-  margin: 20px 0;
-}
-
-.char-card {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-}
-
-/* Responsive tweaks */
+/* 📱 Mobile Responsive */
 @media (max-width: 600px) {
   .grid div {
     width: 50px;
