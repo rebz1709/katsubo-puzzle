@@ -49,9 +49,12 @@ yume-frontend/
 ├── shiro.png
 └── rebz.png
 
-## 👩‍💻 Developed By  
-**Rabiya Khan**  
-🔗 [github.com/rebz1709](https://github.com/rebz1709)
 
+---
+
+## 👩‍💻 Developed By
+
+**Rabiya Khan**  
+🌐 [github.com/rebz1709](https://github.com/rebz1709)
 
 
