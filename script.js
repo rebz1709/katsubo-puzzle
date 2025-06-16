@@ -1,3 +1,4 @@
+// ✅ Fetch character data and display on page
 fetch("https://yume-backend-rabiya.onrender.com/api/characters")
   .then(res => res.json())
   .then(data => {
@@ -23,6 +24,7 @@ fetch("https://yume-backend-rabiya.onrender.com/api/characters")
     });
   });
 
+// 🎮 Puzzle Levels
 const levels = [
   ["🟦", "⬜", "✨"],
   ["⬜", "✨", "🟦"],
@@ -30,11 +32,13 @@ const levels = [
 ];
 let level = 0;
 
+// ✅ Load Puzzle Tiles + Voice
 function loadLevel() {
   const game = document.getElementById("game");
   const message = document.getElementById("message");
   message.textContent = "";
   game.innerHTML = "";
+
   levels[level].forEach(tile => {
     const div = document.createElement("div");
     div.textContent = tile;
@@ -42,14 +46,13 @@ function loadLevel() {
   });
 
   if (level === 0) {
-    const yashVoice = document.getElementById("voice-yash");
-    yashVoice?.play();
+    document.getElementById("voice-yash")?.play();
   } else if (level === 1) {
-    const shiroVoice = document.getElementById("voice-shiro");
-    shiroVoice?.play();
+    document.getElementById("voice-shiro")?.play();
   }
 }
 
+// ✅ Level Progression + Rebz Unlock
 function nextLevel() {
   if (level < levels.length - 1) {
     level++;
@@ -63,9 +66,10 @@ function nextLevel() {
       rebz.style.boxShadow = "0 0 15px gold";
     }
 
-    const rebzAudio = document.getElementById("voice-rebz");
-    rebzAudio?.play();
+    document.getElementById("voice-rebz")?.play();
   }
 }
 
+// ✅ Start Game
 window.onload = loadLevel;
+
