@@ -1,79 +1,239 @@
+/* 🌌 Full Background Poster */
 body {
-  background-color: #0c0e1e;
-  color: white;
-  font-family: sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #fff; /* Ensure text color is visible on dark background */
+
+    /* Corrected filename if it's JPG */
+    background-image: url('Background.jpg');
+    background-color: #000; /* Fallback background color */
+    background-attachment: fixed; /* Keep background fixed when scrolling */
+    background-position: center center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Make sure the image covers the entire viewport */
+
+    /* Optional: Ensure body takes full height to allow 'cover' to work well */
+    min-height: 100vh;
+    display: flex; /* Helps center container vertically later if needed */
+    flex-direction: column; /* For flex layout */
 }
+
+/* 🧩 Centered Game UI Container */
 .container {
-  padding-top: 20px;
-  max-width: 700px;
-  margin: auto;
+    max-width: 90%;
+    width: 600px;
+    margin: auto; /* Centers horizontally */
+    text-align: center;
+    padding: 20px;
+    backdrop-filter: blur(3px); /* Adds a subtle blur effect */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background for content */
+    border-radius: 15px;
+    margin-top: 40px;
+    /* Optional: Add a subtle border or shadow for better contrast */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); /* Cyan glow */
 }
-.poster {
-  width: 100%;
-  max-height: 250px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
+
+/* 🔳 Puzzle Grid */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 80px);
-  gap: 10px;
-  justify-content: center;
-  margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
 }
 .grid div {
-  background-color: #1a1a2e;
-  border: 2px solid white;
-  padding: 20px;
-  font-size: 24px;
-  border-radius: 8px;
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer; /* Indicate it's interactive */
+    transition: background-color 0.2s, border-color 0.2s; /* Smooth hover effect */
 }
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
+.grid div:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #0ff; /* Cyan hover effect */
 }
-button:hover {
-  background-color: #0056b3;
-}
-.subtitle {
-  color: #aaa;
-}
+
+
+/* 🎭 Character Cards */
 .char-wrapper {
-  margin-top: 30px;
+    margin: 20px 0;
 }
 .char-card {
-  background-color: #1a1a2e;
-  border: 1px solid #aaa;
-  padding: 10px;
-  margin: 10px auto;
-  max-width: 300px;
-  border-radius: 6px;
-  color: #f0f0f0;
-  transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex; /* For better avatar/text alignment */
+    align-items: center;
+    justify-content: center; /* Center content within card */
+    flex-direction: column; /* Stack text below image */
 }
-.char-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px #00f7ff;
+.char-card .avatar-box {
+    margin-bottom: 10px; /* Space between avatar and text */
 }
-.avatar-box {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+.char-card .avatar-img {
+    max-width: 80px; /* Limit avatar size */
+    height: auto;
+    border-radius: 50%; /* Make avatar circular */
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
-.avatar-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #007bff;
-  box-shadow: 0 0 10px #007bff;
+
+/* ✨ Headings */
+h1 {
+    font-size: 2.2rem;
+    color: #0ff; /* Bright cyan for title */
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7); /* Subtle glow */
+}
+.subtitle {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #eee;
+}
+
+/* ✅ Quiz Area */
+.quiz-box {
+    margin: 20px 0;
+}
+.quiz-btn {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s; /* Smooth hover */
+}
+.quiz-btn:hover {
+    background-color: #555;
+    transform: translateY(-2px); /* Lift button slightly on hover */
+}
+
+/* Navigation Button */
+button { /* This applies to nextLevel and StartGameButton, toggleBGM */
+    background-color: #007bff; /* A standard blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Specific styling for the message paragraph */
+p#message {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #0ff; /* Highlight success messages */
+    margin-top: 15px;
+}
+
+/* Styling for music controls added directly in HTML before. Let's make them consistent */
+#startGameButton, #toggleBGM {
+    background-color: #28a745; /* Green for start/play */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 20px auto; /* Centered with margin */
+    display: block; /* Ensure it's a block element for margin auto to work */
+    transition: background-color 0.2s;
+}
+
+#startGameButton:hover, #toggleBGM:hover {
+    background-color: #218838;
+}
+
+#bgmVolume {
+    width: 150px;
+    vertical-align: middle;
+    /* Basic slider styling */
+    -webkit-appearance: none; /* Override default appearance */
+    appearance: none;
+    height: 8px;
+    background: #555;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+    border-radius: 4px;
+}
+#bgmVolume:hover {
+    opacity: 1;
+}
+#bgmVolume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #0ff; /* Cyan thumb */
+    cursor: pointer;
+}
+#bgmVolume::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #0ff; /* Cyan thumb */
+    cursor: pointer;
+}
+div[style*="margin-top: 20px; text-align: center;"] label {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+
+/* 📱 Mobile Responsive */
+@media (max-width: 600px) {
+    body {
+        background-size: cover; /* Cover for smaller screens, fills the whole screen */
+        background-position: center center; /* Keep image centered */
+    }
+
+    .grid div {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .container {
+        width: 95%;
+        padding: 15px;
+        margin-top: 20px; /* Reduce top margin for smaller screens */
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .quiz-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    #startGameButton, #toggleBGM, button {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+
+    #bgmVolume {
+        width: 100px; /* Smaller slider on mobile */
+    }
 }
