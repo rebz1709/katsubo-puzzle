@@ -12,20 +12,31 @@ const toggleBGMButton = document.getElementById('toggleBGM');
 
 // Function to play background music (handles autoplay policy)
 function playBackgroundMusic() {
-    // Log the readyState to see if the audio is fully loaded
     console.log("Attempting to play background music. Audio readyState:", bgm.readyState);
 
-    // Only attempt to play if it's paused or not playing
     if (bgm.paused) {
-        bgm.play().then(() => {
-            // Playback was successful
-            console.log("Background music successfully started.");
-        }).catch(error => {
-            // Autoplay was prevented or playback failed
-            console.warn("Background music playback failed or was prevented:", error);
-            // *** IMPORTANT: THIS ALERT WILL TELL US IF PLAY() FAILED ***
-            alert("Music Error: Could not start music. Reason: " + error.message + ". (Check audio file path: audio/background_music.mp3)");
-        });
+        // Check if audio has enough data to play through
+        if (bgm.readyState < 4) { // HTMLMediaElement.HAVE_ENOUGH_DATA (value is 4)
+            console.log("Audio not fully ready, waiting for canplaythrough event...");
+            // Add a one-time listener for when enough data is buffered
+            bgm.addEventListener('canplaythrough', function handler() {
+                bgm.removeEventListener('canplaythrough', handler); // Remove listener to prevent multiple calls
+                bgm.play().then(() => {
+                    console.log("Background music successfully started after canplaythrough.");
+                }).catch(error => {
+                    console.warn("Background music playback failed (after canplaythrough):", error);
+                    alert("Music Error (Load/Play): " + error.message + ". (Check audio file path: audio/background_music.mp3)");
+                });
+            });
+        } else {
+            // Audio is already ready, try to play immediately
+            bgm.play().then(() => {
+                console.log("Background music successfully started immediately.");
+            }).catch(error => {
+                console.warn("Background music playback failed (immediate attempt):", error);
+                alert("Music Error (Immediate Play): " + error.message + ". (Check audio file path: audio/background_music.mp3)");
+            });
+        }
     } else {
         console.log("Background music is already playing.");
     }
@@ -39,14 +50,31 @@ function playBackgroundMusic() {
     }
 }
 
-// Function to pause/play background music
+// Function to pause/play background music (updated for robustness)
 function toggleBackgroundMusic() {
     if (bgm.paused) {
-        bgm.play().catch(error => {
-            console.warn("Manual toggle play failed:", error);
-            alert("Error playing music manually: " + error.message);
-        });
-        toggleBGMButton.textContent = 'Pause Music';
+        console.log("Attempting to play music via toggle. Audio readyState:", bgm.readyState);
+        if (bgm.readyState < 4) {
+            console.log("Audio not fully ready (toggle), waiting for canplaythrough...");
+            bgm.addEventListener('canplaythrough', function handler() {
+                bgm.removeEventListener('canplaythrough', handler);
+                bgm.play().then(() => {
+                    console.log("Music started via toggle after canplaythrough.");
+                    toggleBGMButton.textContent = 'Pause Music';
+                }).catch(error => {
+                    console.warn("Manual toggle play failed (after canplaythrough):", error);
+                    alert("Error playing music manually (Load/Play): " + error.message);
+                });
+            });
+        } else {
+            bgm.play().then(() => {
+                console.log("Music started via toggle immediately.");
+                toggleBGMButton.textContent = 'Pause Music';
+            }).catch(error => {
+                console.warn("Manual toggle play failed (immediate):", error);
+                alert("Error playing music manually (Immediate Play): " + error.message);
+            });
+        }
     } else {
         bgm.pause();
         toggleBGMButton.textContent = 'Play Music';
