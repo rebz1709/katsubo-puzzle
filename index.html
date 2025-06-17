@@ -19,7 +19,7 @@
 
         <div id="game" class="grid"></div>
 
-        <button onclick="nextLevel()">Next</button>
+        <button onclick="nextLevel()" style="display: none;">Next</button> 
         <p id="message"></p>
 
         <div style="margin-top: 20px; text-align: center;">
@@ -28,11 +28,11 @@
             <button id="toggleBGM" style="margin-left: 10px; padding: 5px 10px; cursor: pointer;">Pause/Play Music</button>
         </div>
 
-        <audio id="voice-yash" src="https://voca.ro/1kypiCyEhIQ2?download" preload="auto"></audio>
-        <audio id="voice-shiro" src="https://voca.ro/1bZNgZkPBP7A?download" preload="auto"></audio>
-        <audio id="voice-rebz" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3" preload="auto"></audio>
-
-        <audio id="bgm" src="audio/background_music.mp3" autoplay loop preload="auto"></audio>
+        <audio id="voice-yash" src="audio/yash_voice.mp3" preload="auto"></audio>
+        <audio id="voice-shiro" src="audio/shiro_voice.mp3" preload="auto"></audio>
+        <audio id="voice-rebz" src="audio/rebz_sfx.mp3" preload="auto"></audio> 
+        
+        <audio id="bgm" src="audio/background_music.mp3" loop preload="auto"></audio> 
     </div>
 
     <script src="script.js"></script>
