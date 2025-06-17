@@ -12,13 +12,18 @@ const toggleBGMButton = document.getElementById('toggleBGM');
 
 // Function to play background music (handles autoplay policy)
 function playBackgroundMusic() {
+    console.log("Attempting to play background music..."); // ADDED for debugging
     // Only attempt to play if it's paused or not playing
     if (bgm.paused) {
-        bgm.play().catch(error => {
-            console.warn("Autoplay was prevented. User interaction needed to play music.", error);
+        bgm.play().then(() => { // MODIFIED: Added .then() for successful play
+            console.log("Background music successfully started.");
+        }).catch(error => { // MODIFIED: More detailed error logging
+            console.warn("Autoplay was prevented or playback failed.", error);
             // You could show a message to the user here if you wanted.
             // Example: message.textContent = "Click anywhere to enable music!";
         });
+    } else {
+        console.log("Background music is already playing."); // ADDED for debugging
     }
     // Optionally hide the start button once music starts
     if (startGameButton) {
@@ -86,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (startGameButton) {
         startGameButton.addEventListener('click', () => {
+            alert("Start Game button clicked!"); // <--- IMPORTANT: ADD THIS LINE FOR DEBUGGING
             playBackgroundMusic();
             loadLevel(); // Load the first level of the game after starting music
         });
