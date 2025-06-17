@@ -12,34 +12,40 @@ const toggleBGMButton = document.getElementById('toggleBGM');
 
 // Function to play background music (handles autoplay policy)
 function playBackgroundMusic() {
-    console.log("Attempting to play background music..."); // ADDED for debugging
+    // Log the readyState to see if the audio is fully loaded
+    console.log("Attempting to play background music. Audio readyState:", bgm.readyState);
+
     // Only attempt to play if it's paused or not playing
     if (bgm.paused) {
-        bgm.play().then(() => { // MODIFIED: Added .then() for successful play
+        bgm.play().then(() => {
+            // Playback was successful
             console.log("Background music successfully started.");
-        }).catch(error => { // MODIFIED: More detailed error logging
-            console.warn("Autoplay was prevented or playback failed.", error);
-            // You could show a message to the user here if you wanted.
-            // Example: message.textContent = "Click anywhere to enable music!";
+        }).catch(error => {
+            // Autoplay was prevented or playback failed
+            console.warn("Background music playback failed or was prevented:", error);
+            // *** IMPORTANT: THIS ALERT WILL TELL US IF PLAY() FAILED ***
+            alert("Music Error: Could not start music. Reason: " + error.message + ". (Check audio file path: audio/background_music.mp3)");
         });
     } else {
-        console.log("Background music is already playing."); // ADDED for debugging
+        console.log("Background music is already playing.");
     }
+    
     // Optionally hide the start button once music starts
     if (startGameButton) {
         startGameButton.style.display = 'none';
-        // You might want to hide the quiz/game elements and then show them here
-        // if the start button acts as an actual game start
-        document.getElementById("quiz").style.display = 'block'; // Or however you hide/show your main game UI
+        document.getElementById("quiz").style.display = 'block';
         document.getElementById("characters").style.display = 'block';
-        document.getElementById("game").style.display = 'flex'; // Use flex if it's a flex container
+        document.getElementById("game").style.display = 'flex';
     }
 }
 
 // Function to pause/play background music
 function toggleBackgroundMusic() {
     if (bgm.paused) {
-        bgm.play();
+        bgm.play().catch(error => {
+            console.warn("Manual toggle play failed:", error);
+            alert("Error playing music manually: " + error.message);
+        });
         toggleBGMButton.textContent = 'Pause Music';
     } else {
         bgm.pause();
@@ -75,7 +81,6 @@ function playVoiceRebzSFX() { // Renamed for clarity as it's a general SFX/notif
 function stopAllVoices() {
     voiceYash.pause(); voiceYash.currentTime = 0;
     voiceShiro.pause(); voiceShiro.currentTime = 0;
-    // voiceRebz will be handled by playVoiceRebzSFX() if it's called
 }
 
 
@@ -91,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (startGameButton) {
         startGameButton.addEventListener('click', () => {
-            alert("Start Game button clicked!"); // <--- IMPORTANT: ADD THIS LINE FOR DEBUGGING
             playBackgroundMusic();
             loadLevel(); // Load the first level of the game after starting music
         });
@@ -153,11 +157,11 @@ const stages = [
         question: "Which desire drives the story of Yume no Katsubō?",
         options: [
             "Power over others",
-            "Truth behind memories",
+            "Mithya - The illusion of Truth behind memories",
             "Wealth and fame",
             "Escape from the real world"
         ],
-        answer: 1,
+        answer: 1, // Corrected to match "Truth behind memories" if that's the desired answer
         voice: "voice-yash"
     },
     {
@@ -185,6 +189,7 @@ const stages = [
         voice: "voice-rebz" // Note: This refers to the audio ID, not necessarily the function
     }
 ];
+
 
 let currentLevel = 0;
 
