@@ -5,15 +5,16 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #fff; /* Ensure text color is visible on dark background */
 
-    /* Corrected filename if it's JPG */
-    background-image: url('Background.jpg');
+    /* IMPORTANT: Double-check this path to Background.jpg */
+    /* If Background.jpg is in an 'images' folder, use: url('images/Background.jpg') */
+    background-image: url('Background.jpg'); 
     background-color: #000; /* Fallback background color */
     background-attachment: fixed; /* Keep background fixed when scrolling */
     background-position: center center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Make sure the image covers the entire viewport */
 
-    /* Optional: Ensure body takes full height to allow 'cover' to work well */
+    /* Ensure body takes full height to allow 'cover' to work well */
     min-height: 100vh;
     display: flex; /* Helps center container vertically later if needed */
     flex-direction: column; /* For flex layout */
